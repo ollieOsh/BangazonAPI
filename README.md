@@ -28,9 +28,9 @@ First, you need to plan. Your team needs to come to a consensus about the Bangaz
 
 ### Modeling
 
-Next, you need to author the Models needed for your API. Make sure that each model has the approprate foreign key relationship defined on it, either with a custom type or an `ICollection<T>` to store many related things.
+Next, you need to author the Models needed for your API. Make sure that each model has the approprate foreign key relationship defined on it, either with a custom type or an `ICollection<T>` to store many related things. The boilerplate code shows you one example - the relationship between `Order` and `OrderProduct`, which is 1 -> &#8734;. For every _OrderId_, it can be stored in the `OrderProduct` table many times.
 
-The boilerplate code shows you one example - the relationship between `Order` and `OrderProduct`, which is 1 -> &#8734;. For every _OrderId_, it can be stored in the `OrderProduct` table many times.
+Once you've added a Model, remember to add a new `DBSet<T>` to the `BangazonContext` class for that type.
 
 ### Migrate
 
@@ -40,7 +40,7 @@ Once you have all of your Models defined, attempt your first migration.
 dotnet ef migrations add InitialDBCreation
 ```
 
-This will read your Models and build the instructions necessary to create corresponding tables in the database based off of your annotations and foreign key relationships.
+This will read your Models and build the instructions necessary to create corresponding tables in the database based off of your annotations and foreign key relationships. To be responsible, you should read the migration file before committing the changes to your database.
 
 ### Update Database
 
