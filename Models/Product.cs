@@ -20,5 +20,7 @@ namespace BangazonAPI.Models
         public string Description { get; set; }
  
         public int CustomerId { get; set; }
+
+        public ICollection<OrderProduct> OrderProducts;
     }
 }
