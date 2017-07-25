@@ -14,7 +14,7 @@ Your job is to build out a .NET Web API that makes each resource in the Bangazon
 1. Training programs
 1. Departments
 
-> **Pro tip:** You do not need to make a Model for the join tables, because those aren't resources.
+> **Pro tip:** You do not need to make a Controller for the join tables, because those aren't resources.
 
 Your product owner will provide you with a prioritized backlog of features for you to work on over the development sprint. The first version of the API will be completely open since we have not determined which authentication method we want to use yet.
 
