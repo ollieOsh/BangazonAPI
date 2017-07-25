@@ -13,5 +13,6 @@ namespace BangazonAPI.Models
         public int EmployeeId {get; set;}
         [Required]
         public int TrainingId {get; set; }
+
     }
 }

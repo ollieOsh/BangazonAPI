@@ -15,8 +15,11 @@ namespace BangazonAPI.Models
         public string EmployeePhone {get; set;}
         [Required]
         public int DeptId {get; set;}
+        public Department Department {get; set;}
         [Required]
         public bool IsSupervisor {get; set;}
+        public ICollection<EmployeeTraining> EmployeeTrainings;
+        public ICollection <EmployeeComputer> EmployeeComputer;
 
     }
 }
