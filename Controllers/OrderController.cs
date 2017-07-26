@@ -9,77 +9,70 @@ using Microsoft.EntityFrameworkCore;
 namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("customers")]
+    [Route("orders")]
     [EnableCors("TeamOnly")]
-    public class CustomersController : Controller
+    public class OrderController : Controller
     {
-        private BangazonContext context;
-
-        public CustomersController(BangazonContext ctx)
+        private BangazonContext _context;
+        public OrderController(BangazonContext ctx)
         {
-            context = ctx;
+            _context = ctx;
         }
         
-        // GET /customers
+        // GET /Retrieve all orders
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> customers = from customer in context.Customer select customer;
+            IQueryable<object> orders = from order in _context.Order select order;
 
-            if (customers == null)
+            if (orders == null)
             {
                 return NotFound();
             }
-
-            return Ok(customers);
+            return Ok(orders);
         }
 
-        // GET /customers/5
-        [HttpGet("{id}", Name = "GetCustomer")]
+        // GET /orders/5 / Retrieve single order
+        [HttpGet("{id}", Name = "GetOrder")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
             try
             {
-                Customer customer = context.Customer.Single(m => m.CustomerId == id);
+                Order order = _context.Order.Single(m => m.OrderId == id);
 
-                if (customer == null)
+                if (order == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(customer);
+                return Ok(order);
             }
             catch (System.InvalidOperationException ex)
             {
                 return NotFound();
             }
-
-
         }
 
-        // POST /customers
+        // POST /orders
         [HttpPost]
-        public IActionResult Post([FromBody] Customer customer)
+        public IActionResult Post([FromBody] Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            context.Customer.Add(customer);
-            
+            _context.Order.Add(order);
             try
             {
-                context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (CustomerExists(customer.CustomerId))
+                if (OrderExists(order.OrderId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -88,33 +81,29 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
+            return CreatedAtRoute("GetOrder", new { id = order.OrderId }, order);
         }
 
-        // PUT /customers/5
+        // PUT /orders/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Customer customer)
+        public IActionResult Put(int id, [FromBody] Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != customer.CustomerId)
+            if (id != order.OrderId)
             {
                 return BadRequest();
             }
-
-            context.Entry(customer).State = EntityState.Modified;
-
+            _context.Entry(order).State = EntityState.Modified;
             try
             {
-                context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
@@ -123,11 +112,10 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE /customers/5
+        // DELETE /orders/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -135,23 +123,19 @@ namespace BangazonAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            Customer customer = context.Customer.Single(m => m.CustomerId == id);
-            if (customer == null)
+            Order order = _context.Order.Single(m => m.OrderId == id);
+            if (order == null)
             {
                 return NotFound();
             }
+            _context.Order.Remove(order);
+            _context.SaveChanges();
 
-            context.Customer.Remove(customer);
-            context.SaveChanges();
-
-            return Ok(customer);
+            return Ok(order);
         }
-
-        private bool CustomerExists(int id)
+        private bool OrderExists(int id)
         {
-            return context.Customer.Count(e => e.CustomerId == id) > 0;
+            return _context.Order.Count(e => e.OrderId == id) > 0;
         }
-
     }
 }
