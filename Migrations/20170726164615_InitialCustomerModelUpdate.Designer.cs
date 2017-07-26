@@ -8,8 +8,8 @@ using BangazonAPI.Data;
 namespace BangazonAPI.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20170725204015_InitialDBCreation")]
-    partial class InitialDBCreation
+    [Migration("20170726164615_InitialCustomerModelUpdate")]
+    partial class InitialCustomerModelUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,13 +38,13 @@ namespace BangazonAPI.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("AccountCreated")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<DateTime>("LastActivity")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime>("LastActivity");
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -135,8 +135,7 @@ namespace BangazonAPI.Migrations
                     b.Property<int>("CustomerId");
 
                     b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<int?>("PaymentTypeId");
 
