@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BangazonAPI.Migrations
 {
-    public partial class InitialDBCreation : Migration
+    public partial class InitialCustomerModelUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace BangazonAPI.Migrations
                 {
                     CustomerId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    AccountCreated = table.Column<DateTime>(nullable: false),
+                    AccountCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     FirstName = table.Column<string>(nullable: false),
                     LastActivity = table.Column<DateTime>(nullable: false),
                     LastName = table.Column<string>(nullable: false)
@@ -157,7 +157,7 @@ namespace BangazonAPI.Migrations
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CustomerId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     PaymentTypeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
