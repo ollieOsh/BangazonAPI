@@ -28,9 +28,14 @@ db migrations, etc.
 Outline the steps to test or reproduce the PR here.
 
 ```sh
-git pull --prune
-git checkout <feature_branch>
-bundle; script/server
+git checkout master
+git fetch --all
+git checkout dn-first
+rm -rf Migrations
+rm bangazon.db
+dotnet ef migrations add Initial
+dotnet ef database update
+dotnet run
 ```
 
 1.
