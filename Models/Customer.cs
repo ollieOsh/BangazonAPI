@@ -17,7 +17,6 @@ namespace BangazonAPI.Models
         
         [Required]
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime LastActivity { get; set; }
 
         [Required]

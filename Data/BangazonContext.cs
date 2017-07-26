@@ -18,12 +18,12 @@ namespace BangazonAPI.Data
         public DbSet<EmployeeComputer> EmployeeComputer { get; set; }
         public DbSet<EmployeeTraining> EmployeeTraining { get; set; }
         public DbSet<PaymentType> PaymentType { get; set; }
-        public DbSet<Product> Product { get; set; }
         public DbSet<ProductType> ProductType { get; set; }
+        public DbSet<Product> Product { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Order>()
-                .Property(b => b.DateCreated)
+            modelBuilder.Entity<Customer>()
+                .Property(b => b.AccountCreated)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
         }
     }
