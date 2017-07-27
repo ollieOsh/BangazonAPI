@@ -6,6 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/**
+ * Class: ComputerController
+ * Purpose: The ComputerController class is used to interact with the Computer table in the SQL database.
+ * Author: Dilshod - Teamname-Teamname-Teamaname
+ * Properties:
+ *  Get(List): Returns all the computers in the database
+    Get(Single): Returns an individual computer from the database
+    Post: Adds new computer to the database
+    Put: Updates specific computer information in the database
+    Delete: Deletes specific computer from database
+ */
+
 namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 {
     [Produces("application/json")]

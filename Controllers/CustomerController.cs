@@ -6,6 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/**
+ * Class: CustomerController
+ * Purpose: The CustomerController class is used to interact with the Customer table in the SQL database.
+ * Author: Teamname-Teamname-Teamaname
+ * Properties:
+ *  Get(List): Returns all the customers in the database
+    Get(Single): Returns an individual customer from the database
+    Post: Adds new customer to the database
+    Put: Updates specific customer information in the database
+    Delete: Deletes specific customer from database
+ */
+
 namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]

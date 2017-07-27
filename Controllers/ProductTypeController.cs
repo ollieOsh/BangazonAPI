@@ -9,6 +9,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/**
+ * Class: ProductTypeController
+ * Purpose: The ProductTypeController class is used to interact with the ProductType table in the SQL database.
+ * Author: Joey - Teamname-Teamname-Teamaname
+ * Properties:
+ *  Get(List): Returns all the product types in the database
+    Get(Single): Returns an individual product type from the database
+    Post: Adds new product type to the database
+    Put: Updates specific product type information in the database
+    Delete: Deletes specific product type from database
+ */
+
 namespace BangazonAPI.Controllers // Wednesday, July 26 - Dilshod
 {
     [Produces("application/json")]
