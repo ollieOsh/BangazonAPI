@@ -9,6 +9,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/**
+ * Class: EmployeeController
+ * Purpose: The EmployeeController class is used to interact with the Employee table in the SQL database.
+ * Author: Ollie - Teamname-Teamname-Teamaname
+ * Properties:
+ *  Get(List): Returns all the employees in the database
+    Get(Single): Returns an individual employee from the database
+    Post: Adds new employee to the database
+    Put: Updates specific employee information in the database
+ */
+
 namespace BangazonAPI.Controllers // Thursday, July 27 - Ollie
 {
     [Produces("application/json")]
