@@ -9,34 +9,34 @@ using Microsoft.EntityFrameworkCore;
 namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 {
     [Produces("application/json")]
-    [Route("departments")]
+    [Route("computers")]
     [EnableCors("TeamOnly")]
-    public class DepartmentController : Controller
+    public class ComputerController : Controller
     {
         private BangazonContext _context;
 
-        public DepartmentController(BangazonContext ctx)
+        public ComputerController(BangazonContext ctx)
         {
             _context = ctx;
         }
         
-        // GET / Departments
+        // GET / Computers
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> departments = from department in _context.Department select department;
+            IQueryable<object> computers = from computer in _context.Computer select computer;
 
-            if (departments == null)
+            if (computers == null)
             {
                 return NotFound();
             }
 
-            return Ok(departments);
+            return Ok(computers);
 
         }
 
-        // GET a single Department
-        [HttpGet("{id}", Name = "GetDeparment")]
+        // GET a single Computer
+        [HttpGet("{id}", Name = "GetComputer")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -46,14 +46,14 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 
             try
             {
-                Department department = _context.Department.Single(m => m.DepartmentId == id);
+                Computer computer = _context.Computer.Single(m => m.ComputerId == id);
 
-                if (department == null)
+                if (computer == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(department);
+                return Ok(computer);
             }
             catch (System.InvalidOperationException ex)
             {
@@ -63,16 +63,16 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 
         }
 
-        // POST / Department
+        // POST / computer
         [HttpPost]
-        public IActionResult Post([FromBody] Department department)
+        public IActionResult Post([FromBody] Computer computer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Department.Add(department);
+            _context.Computer.Add(computer);
             
             try
             {
@@ -80,7 +80,7 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
             }
             catch (DbUpdateException)
             {
-                if (DepartmentExists(department.DepartmentId))
+                if (ComputerExists(computer.ComputerId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -90,24 +90,24 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
                 }
             }
 
-            return CreatedAtRoute("GetDeparment", new { id = department.DepartmentId }, department);
+            return CreatedAtRoute("GetCustomer", new { id = computer.ComputerId }, computer);
         }
 
-        // PUT /Department
+        // PUT /computers
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Department department)
+        public IActionResult Put(int id, [FromBody] Computer computer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != department.DepartmentId)
+            if (id != computer.ComputerId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(department).State = EntityState.Modified;
+            _context.Entry(computer).State = EntityState.Modified;
 
             try
             {
@@ -115,7 +115,7 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DepartmentExists(id))
+                if (!ComputerExists(id))
                 {
                     return NotFound();
                 }
@@ -128,9 +128,30 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        private bool DepartmentExists(int id)
+        // DELETE /computer
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            return _context.Department.Count(e => e.DepartmentId == id) > 0;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Computer computer = _context.Computer.Single(m => m.ComputerId == id);
+            if (computer == null)
+            {
+                return NotFound();
+            }
+
+            _context.Computer.Remove(computer);
+            _context.SaveChanges();
+
+            return Ok(computer);
+        }
+
+        private bool ComputerExists(int id)
+        {
+            return _context.Computer.Count(e => e.ComputerId == id) > 0;
         }
 
     }

@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
 using Microsoft.AspNetCore.Cors;
@@ -6,37 +9,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
+namespace BangazonAPI.Controllers // Thursday, July 27 - Ollie
 {
     [Produces("application/json")]
-    [Route("departments")]
+    [Route("employees")]
     [EnableCors("TeamOnly")]
-    public class DepartmentController : Controller
+    public class EmployeeController : Controller
     {
-        private BangazonContext _context;
-
-        public DepartmentController(BangazonContext ctx)
+         private BangazonContext _context;
+        public EmployeeController(BangazonContext ctx)
         {
             _context = ctx;
         }
-        
-        // GET / Departments
+        // GET api/values -- GET All Employees
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> departments = from department in _context.Department select department;
-
-            if (departments == null)
+            IQueryable<object> employees = from employee in _context.Employee select employee;
+            if(employees == null)
             {
                 return NotFound();
             }
-
-            return Ok(departments);
-
+            return Ok(employees);
         }
 
-        // GET a single Department
-        [HttpGet("{id}", Name = "GetDeparment")]
+        // GET api/values/5 - Get A single Employee with ID from Route
+        [HttpGet("{id}", Name = "GetEmployee")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -46,14 +44,14 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 
             try
             {
-                Department department = _context.Department.Single(m => m.DepartmentId == id);
+                Employee employee = _context.Employee.Single(e => e.EmployeeId == id);
 
-                if (department == null)
+                if (employee == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(department);
+                return Ok(employee);
             }
             catch (System.InvalidOperationException ex)
             {
@@ -63,16 +61,16 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 
         }
 
-        // POST / Department
+        // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Department department)
+        public IActionResult Post([FromBody] Employee employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Department.Add(department);
+            _context.Employee.Add(employee);
             
             try
             {
@@ -80,7 +78,7 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
             }
             catch (DbUpdateException)
             {
-                if (DepartmentExists(department.DepartmentId))
+                if (EmployeeExists(employee.EmployeeId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -90,24 +88,24 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
                 }
             }
 
-            return CreatedAtRoute("GetDeparment", new { id = department.DepartmentId }, department);
+            return CreatedAtRoute("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // PUT /Department
+        // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Department department)
+        public IActionResult Put(int id, [FromBody] Employee employee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != department.DepartmentId)
+            if (id != employee.EmployeeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(department).State = EntityState.Modified;
+            _context.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -115,7 +113,7 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DepartmentExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -127,11 +125,9 @@ namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
-
-        private bool DepartmentExists(int id)
+        private bool EmployeeExists(int id)
         {
-            return _context.Department.Count(e => e.DepartmentId == id) > 0;
+            return _context.Employee.Count(e => e.EmployeeId == id) > 0;
         }
-
     }
 }
