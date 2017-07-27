@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+/**
+ * Class: Training
+ * Purpose: The Training class is used to store all training information
+ * Author: Teamname-Teamname-Teamname
+ * Properties:
+ *   TrainingId: A unique idetification number for each training
+     StartDate: The date when the training starts
+     EndDate: The date when the training ends
+     MaxAttendees: The maximum allowable amount of attendees for the training
+     EmployeeTrainings: A collection of EmployeeTrainings to allow database traversing
+ */
+
 namespace BangazonAPI.Models
 {
     public class Training
