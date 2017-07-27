@@ -25,6 +25,10 @@ namespace BangazonAPI.Data
             modelBuilder.Entity<Customer>()
                 .Property(b => b.AccountCreated)
                 .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+                // Sets the DateCreated for the order
+            modelBuilder.Entity<Order>()
+                .Property(c => c.DateCreated)
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");   
         }
     }
 }
