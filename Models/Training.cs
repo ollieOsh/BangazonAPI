@@ -24,7 +24,6 @@ namespace BangazonAPI.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime StartDate {get; set;}
         [Required]
         [DataType(DataType.Date)]
@@ -34,5 +33,10 @@ namespace BangazonAPI.Models
         public int MaxAttendees { get; set; }
 
         public ICollection<EmployeeTraining> EmployeeTrainings;
+
+        public Training()
+        {
+            EndDate = StartDate.AddMonths(3);
+        }
     }
 }
