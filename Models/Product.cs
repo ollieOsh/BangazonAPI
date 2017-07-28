@@ -18,8 +18,9 @@ namespace BangazonAPI.Models
         public string Title {get; set; }
         [Required]
         public string Description { get; set; }
- 
+        [Required]
         public int CustomerId { get; set; }
+        public virtual Customer Customer
 
         public ICollection<OrderProduct> OrderProducts;
     }
