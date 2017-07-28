@@ -27,8 +27,9 @@ namespace BangazonAPI.Models
         public DateTime StartDate {get; set;}
         [Required]
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime EndDate {get; set; }
+        [Required]
+        public string Name {get; set;}
         [Required]
         public int MaxAttendees { get; set; }
 

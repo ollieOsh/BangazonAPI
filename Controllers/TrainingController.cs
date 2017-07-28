@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
@@ -140,10 +141,19 @@ namespace BangazonAPI.Controllers
             {
                 return NotFound();
             }
-            _context.Training.Remove(training);
-            _context.SaveChanges();
+            DateTime today = DateTime.Today;
+            var compareDate = DateTime.Compare(today, (DateTime)training.StartDate);
+            if (compareDate < 0)
+            {
+                _context.Training.Remove(training);
+                 _context.SaveChanges();
 
-            return Ok(training);
+                return Ok(training);
+            } else 
+            {
+                return BadRequest();
+            }
+            
         }
         private bool TrainingExists(int id)
         {
