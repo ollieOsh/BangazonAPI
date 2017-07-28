@@ -11,8 +11,12 @@ namespace BangazonAPI.Models
         public int EmployeeComputerId {get; set;}
         [Required]
         public int ComputerId {get; set;}
+        public Computer Computer {get; set;} 
+        
         [Required]
         public int EmployeeId {get; set;}
+        public Employee Employee {get; set; }
+
         
         [Required]
         [DataType(DataType.Date)]
