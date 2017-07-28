@@ -33,5 +33,11 @@ namespace BangazonAPI.Models
         public DateTime DecommissionDate {get; set;}
 
         public ICollection <EmployeeComputer> EmployeeComputer;
+
+         public Computer()
+        {
+            PurchaseDate = DateTime.Now;
+            DecommissionDate = PurchaseDate.AddYears(2);
+        }
     }
 }

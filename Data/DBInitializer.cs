@@ -43,11 +43,9 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
             {
                 new ProductType{
                     ProductTypeName = "Sports",
-                    ProductTypeId = 1,
                 },
                 new ProductType{
                     ProductTypeName = "Toys",
-                    ProductTypeId = 2,
                 },
                 
             };
@@ -64,7 +62,7 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
                 ProductTypeId = productsType.Single(s => s.ProductTypeName =="Sports").ProductTypeId,
                 Price = 50.00, 
                 Title = "Baseball Glove", 
-                Description = "This glove will help you catch baseballs.",    
+                Description = "This glove will help you catch baseballs."    
             },
             new Product{
                 ProductTypeId = productsType.Single(s => s.ProductTypeName =="Sports").ProductTypeId,
