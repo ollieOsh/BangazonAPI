@@ -34,10 +34,5 @@ namespace BangazonAPI.Models
         public int MaxAttendees { get; set; }
 
         public ICollection<EmployeeTraining> EmployeeTrainings;
-
-        public Training()
-        {
-            EndDate = StartDate.AddMonths(3);
-        }
     }
 }
