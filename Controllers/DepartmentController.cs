@@ -6,6 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/**
+ * Class: DepartmentController
+ * Purpose: The DepartmentController class is used to interact with the Department table in the SQL database.
+ * Author: Dilshod - Teamname-Teamname-Teamaname
+ * Properties:
+ *  Get(List): Returns all the departments in the database
+    Get(Single): Returns an individual department from the database
+    Post: Adds new department to the database
+    Put: Updates specific department information in the database
+ */
+
 namespace Bangazon.Controllers // Wendsday, July 26 - Dilshod
 {
     [Produces("application/json")]

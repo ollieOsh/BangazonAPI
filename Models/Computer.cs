@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+/**
+ * Class: Computer
+ * Purpose: The Computer class is used to store all computer information.
+ * Author: Teamname-Teamname-Teamaname
+ * Properties:
+ *   ComputerId: A unique idetification number for each employee 
+     PurchaseDate: Date the computer was acquired
+     DecommissionDate: Date on which the computer shall be put down
+     EmployeeComputer: Collection of joint information from the Employee and Computer tables (joint table detailing which employee was assigned which computer and when)
+ */
+
 namespace BangazonAPI.Models
 {
     public class Computer

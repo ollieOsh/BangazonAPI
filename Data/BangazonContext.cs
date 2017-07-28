@@ -20,6 +20,7 @@ namespace BangazonAPI.Data
         public DbSet<PaymentType> PaymentType { get; set; }
         public DbSet<ProductType> ProductType { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Training> Training { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>()
@@ -28,7 +29,10 @@ namespace BangazonAPI.Data
                 // Sets the DateCreated for the order
             modelBuilder.Entity<Order>()
                 .Property(c => c.DateCreated)
-                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");   
+                .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
+            modelBuilder.Entity<Training>()
+                .Property(c => c.EndDate)
+                .HasDefaultValueSql("strftime('%Y-%m-%d')");    
         }
     }
 }

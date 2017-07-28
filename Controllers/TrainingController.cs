@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using BangazonAPI.Data;
 using BangazonAPI.Models;
@@ -7,45 +8,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 /**
- * Class: OrderController
- * Purpose: The OrderController class is used to interact with the Order table in the SQL database.
- * Author: Kathy - Teamname-Teamname-Teamaname
+ * Class: TrainingController
+ * Purpose: The TrainingController class is used to interact with the Training table in the SQL database.
+ * Author: Ollie - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the orders in the database
-    Get(Single): Returns an individual order from the database
-    Post: Adds new order to the database
-    Put: Updates specific order information in the database
-    Delete: Deletes specific order from database
+ *  Get(List): Returns all the training programs in the database
+    Get(Single): Returns an individual training program from the database
+    Post: Adds new training program to the database
+    Put: Updates specific training program information in the database
+    Delete: Deletes specific training program from database (only if it hasn't started yet)
  */
 
 namespace BangazonAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("orders")]
+    [Route("trainings")]
     [EnableCors("TeamOnly")]
-    public class OrderController : Controller
+    public class TrainingController : Controller
     {
         private BangazonContext _context;
-        public OrderController(BangazonContext ctx)
+        public TrainingController(BangazonContext ctx)
         {
             _context = ctx;
         }
         
-        // GET /Retrieve all orders
+        // GET /trainings Retrieve all training programs
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> orders = from order in _context.Order select order;
+            IQueryable<object> trainings = from training in _context.Training select training;
 
-            if (orders == null)
+            if (trainings == null)
             {
                 return NotFound();
             }
-            return Ok(orders);
+            return Ok(trainings);
         }
 
-        // GET /orders/5 / Retrieve single order
-        [HttpGet("{id}", Name = "GetOrder")]
+        // GET /trainings/{id} / Retrieve single training
+        [HttpGet("{id}", Name = "GetTraining")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -54,14 +55,14 @@ namespace BangazonAPI.Controllers
             }
             try
             {
-                Order order = _context.Order.Single(m => m.OrderId == id);
+                Training training = _context.Training.Single(m => m.TrainingId == id);
 
-                if (order == null)
+                if (training == null)
                 {
                     return NotFound();
                 }
                 
-                return Ok(order);
+                return Ok(training);
             }
             catch (System.InvalidOperationException ex)
             {
@@ -69,22 +70,22 @@ namespace BangazonAPI.Controllers
             }
         }
 
-        // POST /orders
+        // POST /trainings
         [HttpPost]
-        public IActionResult Post([FromBody] Order order)
+        public IActionResult Post([FromBody] Training training)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            _context.Order.Add(order);
+            _context.Training.Add(training);
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (OrderExists(order.OrderId))
+                if (TrainingExists(training.TrainingId))
                 {
                     return new StatusCodeResult(StatusCodes.Status409Conflict);
                 }
@@ -93,29 +94,29 @@ namespace BangazonAPI.Controllers
                     throw;
                 }
             }
-            return CreatedAtRoute("GetOrder", new { id = order.OrderId }, order);
+            return CreatedAtRoute("GetTraining", new { id = training.TrainingId }, training);
         }
 
-        // PUT /orders/5
+        // PUT /trainings/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Order order)
+        public IActionResult Put(int id, [FromBody] Training training)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (id != order.OrderId)
+            if (id != training.TrainingId)
             {
                 return BadRequest();
             }
-            _context.Entry(order).State = EntityState.Modified;
+            _context.Entry(training).State = EntityState.Modified;
             try
             {
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!TrainingExists(id))
                 {
                     return NotFound();
                 }
@@ -127,7 +128,7 @@ namespace BangazonAPI.Controllers
             return new StatusCodeResult(StatusCodes.Status204NoContent);
         }
 
-        // DELETE /orders/5
+        // DELETE /trainings/{id} -- ** only if start date is in the future **
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -135,19 +136,28 @@ namespace BangazonAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            Order order = _context.Order.Single(m => m.OrderId == id);
-            if (order == null)
+            Training training = _context.Training.Single(m => m.TrainingId == id);
+            if (training == null)
             {
                 return NotFound();
             }
-            _context.Order.Remove(order);
-            _context.SaveChanges();
+            DateTime today = DateTime.Today;
+            var compareDate = DateTime.Compare(today, (DateTime)training.StartDate);
+            if (compareDate < 0)
+            {
+                _context.Training.Remove(training);
+                 _context.SaveChanges();
 
-            return Ok(order);
+                return Ok(training);
+            } else 
+            {
+                return BadRequest();
+            }
+            
         }
-        private bool OrderExists(int id)
+        private bool TrainingExists(int id)
         {
-            return _context.Order.Count(e => e.OrderId == id) > 0;
+            return _context.Training.Count(e => e.TrainingId == id) > 0;
         }
     }
 }
