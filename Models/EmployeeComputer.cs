@@ -33,13 +33,14 @@ namespace BangazonAPI.Models
         
         [Required]
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime StartDate {get; set;}
 
         [DataType(DataType.Date)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime EndDate {get; set;}
+        public DateTime? EndDate {get; set;}
 
-
+        public EmployeeComputer()
+        {
+            StartDate = DateTime.Now;
+        }
     }
 }
