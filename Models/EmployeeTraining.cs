@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
  * Properties:
  *   EmployeeTrainingId: A unique idetification number for each employee/training relationship
      EmployeeId: A unique idetification number for each employee
+     Employee: The reference to the employee associated with this employee/training relationship
      TrainingId: A unique idetification number for each training
+     Training: The reference to the training associated with this employee/training relationship
      
  */
 
@@ -23,7 +25,10 @@ namespace BangazonAPI.Models
         [Required]
         public int EmployeeId {get; set;}
         [Required]
+        public Employee Employee { get; set; }
+        [Required]
         public int TrainingId {get; set; }
+        public Training Training { get; set; }
 
     }
 }
