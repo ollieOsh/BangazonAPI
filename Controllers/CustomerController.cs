@@ -11,11 +11,10 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The CustomerController class is used to interact with the Customer table in the SQL database.
  * Author: Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the customers in the database
-    Get(Single): Returns an individual customer from the database
+ *  Get: Returns all the customers in the database
+    Get(int id): Returns an individual customer from the database
     Post: Adds new customer to the database
     Put: Updates specific customer information in the database
-    Delete: Deletes specific customer from database
  */
 
 namespace BangazonAPI.Controllers
@@ -137,27 +136,6 @@ namespace BangazonAPI.Controllers
             }
 
             return new StatusCodeResult(StatusCodes.Status204NoContent);
-        }
-
-        // DELETE /customers/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Customer customer = context.Customer.Single(m => m.CustomerId == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            context.Customer.Remove(customer);
-            context.SaveChanges();
-
-            return Ok(customer);
         }
 
         private bool CustomerExists(int id)

@@ -14,8 +14,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The EmployeeController class is used to interact with the Employee table in the SQL database.
  * Author: Ollie - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the employees in the database
-    Get(Single): Returns an individual employee from the database
+ *  Get: Returns all the employees in the database
+    Get(int id): Returns an individual employee from the database
     Post: Adds new employee to the database
     Put: Updates specific employee information in the database
  */

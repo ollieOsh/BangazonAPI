@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The PaymentTypeController class is used to interact with the PaymentType table in the SQL database.
  * Author: Joey - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the payment types in the database
-    Get(Single): Returns an individual payment type from the database
+ *  Get: Returns all the payment types in the database
+    Get(int id): Returns an individual payment type from the database
     Post: Adds new payment type to the database
     Put: Updates specific payment type information in the database
     Delete: Deletes specific payment type from database

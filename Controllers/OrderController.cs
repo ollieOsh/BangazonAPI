@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The OrderController class is used to interact with the Order table in the SQL database.
  * Author: Kathy - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the orders in the database
-    Get(Single): Returns an individual order from the database
+ *  Get: Returns all the orders in the database
+    Get(int id): Returns an individual order from the database
     Post: Adds new order to the database
     Put: Updates specific order information in the database
     Delete: Deletes specific order from database

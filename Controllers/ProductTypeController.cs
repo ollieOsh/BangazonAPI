@@ -14,8 +14,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The ProductTypeController class is used to interact with the ProductType table in the SQL database.
  * Author: Joey - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the product types in the database
-    Get(Single): Returns an individual product type from the database
+ *  Get: Returns all the product types in the database
+    Get(int id): Returns an individual product type from the database
     Post: Adds new product type to the database
     Put: Updates specific product type information in the database
     Delete: Deletes specific product type from database
