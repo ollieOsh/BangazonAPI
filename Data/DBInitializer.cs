@@ -42,10 +42,10 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28, 31
                 var productsType =  new ProductType[]
                 {
                     new ProductType{
-                        ProductTypeName = "Sports",
+                        ProductTypeName = "Sports"
                     },
                     new ProductType{
-                        ProductTypeName = "Toys",
+                        ProductTypeName = "Toys"
                     }  
                 };
                 foreach(ProductType i in productsType)
