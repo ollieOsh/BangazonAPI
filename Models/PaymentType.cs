@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
  * Properties:
  *   PaymentTypeId: A unique idetification number for each payment type 
      CustomerId: The specific customer associated with this PaymentTypeId
+     Customer: The reference to the customer associated with this PaymentTypeId
      AccountNumber: The account number associated with this PaymentTypeId
      PaymentTypeName: The name of the payment type
  */
@@ -22,6 +23,8 @@ namespace BangazonAPI.Models
 
         [Required]
         public int CustomerId { get; set; }
+        [Required]
+        public Customer Customer { get; set; }
         [Required]
         public int AccountNumber { get; set; }
         [Required]
