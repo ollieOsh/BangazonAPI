@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The TrainingController class is used to interact with the Training table in the SQL database.
  * Author: Ollie - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the training programs in the database
-    Get(Single): Returns an individual training program from the database
+ *  Get: Returns all the training programs in the database
+    Get(int id): Returns an individual training program from the database
     Post: Adds new training program to the database
     Put: Updates specific training program information in the database
     Delete: Deletes specific training program from database (only if it hasn't started yet)

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore;
  * Purpose: The ComputerController class is used to interact with the Computer table in the SQL database.
  * Author: Dilshod - Teamname-Teamname-Teamaname
  * Properties:
- *  Get(List): Returns all the computers in the database
-    Get(Single): Returns an individual computer from the database
+ *  Get: Returns all the computers in the database
+    Get(int id): Returns an individual computer from the database
     Post: Adds new computer to the database
     Put: Updates specific computer information in the database
     Delete: Deletes specific computer from database
