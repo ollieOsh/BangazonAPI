@@ -20,17 +20,21 @@ namespace BangazonAPI.Models
     {
         [Key]
         public int ComputerId {get; set; }
+        
+        [Required]
+        public int ModelNumber {get; set;}
         [Required]
         [DataType(DataType.Date)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime PurchaseDate {get; set;}
         [Required]
         [DataType(DataType.Date)]
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime DecommissionDate {get; set;}
 
         public ICollection <EmployeeComputer> EmployeeComputer;
-        
-        public Computer()
+
+         public Computer()
         {
             PurchaseDate = DateTime.Now;
             DecommissionDate = PurchaseDate.AddYears(2);

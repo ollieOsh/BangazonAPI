@@ -59,6 +59,8 @@ namespace BangazonAPI
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            DbInitializer.Initialize(app.ApplicationServices);
+
             app.UseMvc();
 
         }
