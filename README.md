@@ -20,7 +20,7 @@ Only requests from the `www.bangazon.com` domain are allowed. Requests from that
 ## Steps:
 
 1. Create an environment variable in your `.zschrc` or `.bashrc` file with the following syntax:
-`export BANGAZON_DB="/Users/mitchellblom/workspace/c19/bangazon/BangazonAPI/bang.db"`
+`export BANGAZON_DB="/Users/kathleenweisensel/workspace/csharp/bangazon/BangazonAPI/bangazonapi.db"`
 
 2. Clone from github using `git clone` `https://github.com/teamname-teamname-teamname/BangazonAPI.git`
 `cd` into the directory you created
