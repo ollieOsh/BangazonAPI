@@ -62,28 +62,28 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28, 31
                         Price = 50.00, 
                         Title = "Baseball Glove", 
                         Description = "This glove will help you catch baseballs.",
-                        CustomerId = 1   
+                        CustomerId = customer.Single(s => s.FirstName == "Wacka Flocka").CustomerId   
                     },
                     new Product{
                         ProductTypeId = productsType.Single(s => s.ProductTypeName =="Sports").ProductTypeId,
                         Price = 30.00, 
                         Title = "Basketball", 
                         Description = "Learn to dunk!",
-                        CustomerId = 1    
+                        CustomerId = customer.Single(s => s.FirstName == "Riff").CustomerId    
                     },
                     new Product{
                         ProductTypeId = productsType.Single(s => s.ProductTypeName =="Toys").ProductTypeId,
                         Price = 10.00, 
                         Title = "Teddy Bear", 
                         Description = "Get it for the kids.",
-                        CustomerId = 1   
+                        CustomerId = customer.Single(s => s.FirstName == "Wacka Flocka").CustomerId   
                     },
                     new Product{
                         ProductTypeId = productsType.Single(s => s.ProductTypeName =="Toys").ProductTypeId,
                         Price = 5.00, 
                         Title = "Coloring Book", 
                         Description = "Stay in the lines. Or don't. Its up to you.",
-                        CustomerId = 1 
+                        CustomerId = customer.Single(s => s.FirstName == "Gucci").CustomerId 
                     }
                 };  
                 foreach(Product i in products)
@@ -136,6 +136,31 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28, 31
                 foreach(Order i in orders)
                 {
                     context.Order.Add(i);
+                }
+                context.SaveChanges();
+
+                var orderProduct = new OrderProduct[]
+                {
+                    new OrderProduct{
+                        OrderId = 1,
+                        ProductId = products.Single(s => s.Title == "Baseball Glove").ProductId
+                    },
+                    new OrderProduct{
+                        OrderId = 1,
+                        ProductId = products.Single(s => s.Title == "Teddy Bear").ProductId
+                    },
+                    new OrderProduct{
+                        OrderId = 2,
+                        ProductId = products.Single(s => s.Title == "Basketball").ProductId
+                    },
+                    new OrderProduct{
+                        OrderId = 3,
+                        ProductId = products.Single(s => s.Title == "Coloring Book").ProductId
+                    } 
+                };
+                foreach(OrderProduct i in orderProduct)
+                {
+                    context.OrderProduct.Add(i);
                 }
                 context.SaveChanges();
 
