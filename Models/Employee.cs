@@ -28,7 +28,7 @@ namespace BangazonAPI.Models
         [Required]
         public string EmployeePhone {get; set;}
         [Required]
-        public int? DeptId {get; set;}
+        public int? DepartmentId {get; set;}
         public Department Department {get; set;}
         [Required]
         public bool IsSupervisor {get; set;}
