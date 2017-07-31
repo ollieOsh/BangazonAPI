@@ -32,8 +32,8 @@ namespace BangazonAPI.Models
         public Department Department {get; set;}
         [Required]
         public bool IsSupervisor {get; set;}
-        public ICollection<EmployeeTraining> EmployeeTrainings;
-        public ICollection <EmployeeComputer> EmployeeComputer;
+        public ICollection<EmployeeTraining> EmployeeTrainings {get; set;}
+        public ICollection <EmployeeComputer> EmployeeComputer {get; set;}
 
     }
 }

@@ -33,6 +33,6 @@ namespace BangazonAPI.Models
         [Required]
         public int MaxAttendees { get; set; }
 
-        public ICollection<EmployeeTraining> EmployeeTrainings;
+        public ICollection<EmployeeTraining> EmployeeTrainings {get; set;}
     }
 }

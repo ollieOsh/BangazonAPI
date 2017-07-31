@@ -30,7 +30,7 @@ namespace BangazonAPI.Models
         [DataType(DataType.Date)]
         public DateTime DecommissionDate {get; set;}
 
-        public ICollection <EmployeeComputer> EmployeeComputer;
+        public ICollection <EmployeeComputer> EmployeeComputer {get; set;}
 
         public Computer()
         {

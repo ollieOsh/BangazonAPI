@@ -25,10 +25,10 @@ namespace BangazonAPI.Models
         [Required]
         public int EmployeeId {get; set;}
         [Required]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         [Required]
         public int TrainingId {get; set; }
-        public Training Training { get; set; }
+        public virtual Training Training { get; set; }
 
     }
 }
