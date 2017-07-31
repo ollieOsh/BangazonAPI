@@ -33,7 +33,7 @@ namespace BangazonAPI.Models
     public Customer Customer { get; set; }
     public int? PaymentTypeId { get; set;} // ? means that the variable can be null
     public PaymentType PaymentType { get; set; }
-    public ICollection<OrderProduct> OrderProducts;
+    public ICollection<OrderProduct> OrderProducts {get; set;}
 
   }
 }

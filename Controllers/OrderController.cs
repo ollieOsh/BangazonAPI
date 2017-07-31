@@ -35,7 +35,7 @@ namespace BangazonAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IQueryable<object> orders = from order in _context.Order select order;
+            IQueryable<object> orders = _context.Order.Include("OrderProducts.Product");
 
             if (orders == null)
             {
@@ -54,7 +54,7 @@ namespace BangazonAPI.Controllers
             }
             try
             {
-                Order order = _context.Order.Single(m => m.OrderId == id);
+                Order order = _context.Order.Include("OrderProducts.Product").Single(m => m.OrderId == id);
 
                 if (order == null)
                 {
