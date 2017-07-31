@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using  BangazonAPI.Models;
 using System.Threading.Tasks;
 
-namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
+namespace BangazonAPI.Data //Worked on by Joey, July 27, 28, 31
 {
     public static class DbInitializer
     {
@@ -68,19 +68,19 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
                 ProductTypeId = productsType.Single(s => s.ProductTypeName =="Sports").ProductTypeId,
                 Price = 30.00, 
                 Title = "Basketball", 
-                Description = "Learn to dunk!",    
+                Description = "Learn to dunk!"    
             },
             new Product{
                 ProductTypeId = productsType.Single(s => s.ProductTypeName =="Toys").ProductTypeId,
                 Price = 10.00, 
                 Title = "Teddy Bear", 
-                Description = "Get it for the kids.",    
+                Description = "Get it for the kids."   
             },
             new Product{
                 ProductTypeId = productsType.Single(s => s.ProductTypeName =="Toys").ProductTypeId,
                 Price = 5.00, 
                 Title = "Coloring Book", 
-                Description = "Stay in the lines. Or don't. Its up to you.",    
+                Description = "Stay in the lines. Or don't. Its up to you."  
             }
         };  foreach(Product i in products)
             {
@@ -117,15 +117,15 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
             {
                 new Order{
                     CustomerId = customer.Single(s => s.FirstName == "Wacka Flocka").CustomerId,
-                    PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Cash").PaymentTypeId, 
+                    // PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Cash").PaymentTypeId, 
                 },
                 new Order{
                     CustomerId = customer.Single(s => s.FirstName == "Riff").CustomerId,
-                    PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Visa").PaymentTypeId, 
+                    // PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Visa").PaymentTypeId, 
                 },
                 new Order{
                     CustomerId = customer.Single(s => s.FirstName == "Gucci").CustomerId,
-                    PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Mastercard").PaymentTypeId, 
+                    // PaymentTypeId = paymentTypes.Single(s => s.PaymentTypeName == "Mastercard").PaymentTypeId, 
                 }
             };foreach(Order i in orders)
             {
@@ -213,6 +213,28 @@ namespace BangazonAPI.Data //Worked on by Joey, July 27, 28
                 context.EmployeeComputer.Add(i);
             }
             context.SaveChanges();
+
+            var training = new Training[]
+            {
+                new Training{
+                    StartDate = new DateTime(2017, 08, 01),
+                    EndDate = new DateTime(2017, 08, 07),
+                    Name = "Computer Training",
+                    MaxAttendees = 25
+                },
+                new Training{
+                    StartDate = new DateTime(2017, 09, 01),
+                    EndDate = new DateTime(2017, 09, 07),
+                    Name = "Up Selling", 
+                    MaxAttendees = 40
+                },
+                new Training{
+                    StartDate = new DateTime(2017, 09, 10),
+                    EndDate = new DateTime(2017, 09, 12),
+                    Name = "Sensitivity Traning",
+                    MaxAttendees = 6
+                }
+            };
         }
     }
 }
